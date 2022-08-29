@@ -16,7 +16,7 @@ app.use(express.static('public'))
 
 // 將資料帶入index列表樣板
 app.get('/', (req, res) => {
-  res.render('index', { restaurantList })
+  res.render('index', { restaurantList: restaurantList })
 })
 
 // 將資料帶入show個別樣板
@@ -34,10 +34,10 @@ app.get('/search', (req, res) => {
   const keyword = req.query.keywords.trim().toLowerCase()
 
   const restaurants = restaurantList.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword) || restaurant.category.includes(keyword)
+    return restaurant.name.toLowerCase().includes(keyword) || 
+    restaurant.category.includes(keyword)
   })
-
-  res.render('index', { restaurantList: restaurants, keywords })
+  res.render('index', { restaurantList: restaurants, keywords: keywords })
 })
 
 
